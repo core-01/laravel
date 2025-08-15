@@ -20,14 +20,13 @@ class Blog extends Model
     ];
 
     // Automatically generate slug
-    protected static function boot()
+    protected static function booted()
     {
-        parent::boot();
-
         static::creating(function ($blog) {
             if (empty($blog->slug)) {
                 $blog->slug = Str::slug($blog->title) . '-' . uniqid();
             }
         });
     }
+
 }

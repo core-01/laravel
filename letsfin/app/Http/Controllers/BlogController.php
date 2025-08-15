@@ -8,13 +8,10 @@ use Illuminate\Support\Carbon;
 
 class BlogController extends Controller
 {
-    /**
-     * Show list of blogs
-     */
     public function index()
     {
-        // Fetch all blogs
         $blogs = DB::table('blogs')
+            ->where('status', 'published') 
             ->select('id', 'title', 'slug', 'content', 'featured_image', 'published_at')
             ->orderBy('published_at', 'desc')
             ->get()
@@ -28,14 +25,11 @@ class BlogController extends Controller
         return view('front.blogs.index', compact('blogs'));
     }
 
-    /**
-     * Show single blog by slug
-     */
     public function show($slug)
     {
-        // Fetch single blog
         $blog = DB::table('blogs')
             ->where('slug', $slug)
+            ->where('status', 'published') 
             ->select('id', 'title', 'slug', 'content', 'featured_image', 'published_at')
             ->first();
 

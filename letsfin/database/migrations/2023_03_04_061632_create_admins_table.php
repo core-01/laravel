@@ -20,6 +20,11 @@ class CreateAdminsTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->timestamps();
+            $table->string('mobile')->nullable();
+            $table->tinyInteger('role')->default(2);
+            $table->string('Hash_password');
+            $table->tinyInteger('status')->default(1);
+
         });
     }
 
